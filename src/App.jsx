@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import TodoList from './components/TodoList/TodoList'
 import AddTodo from './components/AddTodo/AddTodo'
+import TodoContext from './context/TodoContext'
 
 function App() {
   const [todos,setTodos]= useState([
@@ -17,11 +18,15 @@ function App() {
     console.log("inside addnewtodod s")
       setTodos([...todos,{id:nextId,text:todoText, isFinished:false,}])
   }
-
+   
+  console.log("inside app jsx");
   return (
     <div>
-      <AddTodo addNewTodo={addNewTodo}></AddTodo>
-      <TodoList todos={todos}  setTodos={setTodos} ></TodoList>
+      <TodoContext.Provider value={{todos,setTodos}}>
+        <AddTodo ></AddTodo>
+        <TodoList ></TodoList>
+      </TodoContext.Provider>
+     
     </div>
   )
 }

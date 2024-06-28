@@ -1,17 +1,21 @@
+import { useContext } from 'react';
 import Todo from '../Todo/Todo'
-function TodoList({todos,setTodos}){
+import TodoContext from '../../context/TodoContext';
+function TodoList(){
 
     // function onDeleteTodo(id){
     //     console.log("inside on delete todo")
     //     const newTodoList=todos.filter(todo=> todo.id != id);
     //     
-    
+    const {todos,setTodos}=useContext(TodoContext);
+
     function onDeleteTodo(id) {
         const newTodoList = todos.filter(todo => todo.id !== id);
         setTodos(newTodoList);
     };
 
    function onEditTodo(id,newTodo){
+    console.log("inside edit todo");
        const newTodoList= todos.map(todo=>{
            if(todo.id==id){
             todo.text=newTodo;
